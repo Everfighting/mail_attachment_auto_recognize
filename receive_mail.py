@@ -11,7 +11,7 @@ class FetchEmail():
     connection = None
     error = None
 
-    def __init__(self, ):
+    def __init__(self, mail_server, username, password):
         self.connection = imaplib.IMAP4_SSL(mail_server)
         self.connection.login(username, password)
         self.connection.select(readonly=1)
@@ -45,7 +45,7 @@ class FetchEmail():
                 except:
                     print("No new emails to read.")
                     self.close_connection()
-                    exit()
+                    break
                 msg = email.message_from_bytes(data[0][1])
                 self.save_attachment(msg)
                 if isinstance(msg, str) == False:
@@ -60,8 +60,14 @@ class FetchEmail():
 
 
 if __name__ == '__main__':
-    mail_server = ''
-    username = ''
-    password = ''
-    fetch_email = FetchEmail(mail_server, username, password)
-    emails = fetch_email.fetch_unread_messages()
+    mail_server = 'imap.qq.com'
+    username = '903601682'
+    password = 'hdypatutgdvcbdig'
+
+    flag = True
+    while flag:
+        fetch_email = FetchEmail(mail_server, username, password)
+        emails = fetch_email.fetch_unread_messages()
+        print("邮件收取中。。。")
+        if emails:
+            flag = False

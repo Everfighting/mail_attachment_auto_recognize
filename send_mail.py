@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# @Time    : 2020/12/31 5:07 下午
+# @File    : send_mail.py
 from email.header import Header
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -16,15 +18,15 @@ str_trad = trad.strftime('%Y-%m-%d')
 
 class SendMail:
 
-    def __init__(self, from_mail, tolist, username, password):
+    def __init__(self, from_mail, to_username, username, password):
         self.From = from_mail  # 发件人
-        self.tolist = ','.join(tolist)  # 收件人列表
+        self.to_username = to_username  # 收件人
         self.username = username
         self.password = password
 
     def send_mail(self, excel_path):
         # mail.qq
-        server=smtplib.SMTP("smtp.qq.com", 25)
+        server = smtplib.SMTP("smtp.qq.com", 25)
         # # mail.163
         # server = smtplib.SMTP("smtp.163.com",25)
         server.starttls()
@@ -49,7 +51,7 @@ class SendMail:
 
         # 设置根容器属性
         main_msg['From'] = self.From
-        main_msg['To'] = self.tolist  # 收件人
+        main_msg['To'] = self.to_username  # 收件人
         main_msg['Subject'] = Header("%s日运营数据..." % str_trad)
         main_msg['Date'] = formatdate()  # 发件时间
 
@@ -58,7 +60,7 @@ class SendMail:
 
         # 用smtp发送邮件
         try:
-            server.sendmail(self.From, self.tolist.split(','), fulltext)
+            server.sendmail(self.From, self.to_username, fulltext)
             print('success')
         except smtplib.SMTPException as e:
             print('error', e)
@@ -69,11 +71,11 @@ class SendMail:
 if __name__ == '__main__':
     # # mail.qq.com
     from_mail = ''
-    tolist = ['']
+    to_username = ''
     username = ''
-    password = '' # 此处填写授权码
+    password = ''  # 此处填写授权码
 
     file_path = r'./to_send'
     # sendmail
-    send = SendMail(from_mail, tolist, username, password)
+    send = SendMail(from_mail, to_username, username, password)
     send.send_mail(file_path)
