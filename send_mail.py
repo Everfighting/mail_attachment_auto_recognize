@@ -37,7 +37,7 @@ class SendMail:
         main_msg = MIMEMultipart()
 
         # 构造MIMEText对象做为邮件显示内容并附加到根容器
-        text_msg = MIMEText("附件是%s日的数据, 请查收" % str_trad)
+        text_msg = MIMEText("附件为您所需要的格式化数据表，请您查收审阅。\n很高兴为您服务，期待再次与您合作。\n\n\t\t\t  XXXX团队敬上")
         main_msg.attach(text_msg)
 
         # 构造MIMEBase对象做为文件附件内容并附加到根容器
@@ -52,7 +52,7 @@ class SendMail:
         # 设置根容器属性
         main_msg['From'] = self.From
         main_msg['To'] = self.to_username  # 收件人
-        main_msg['Subject'] = Header("%s日运营数据..." % str_trad)
+        main_msg['Subject'] = Header("%s日格式化数据回复..." % str_trad)
         main_msg['Date'] = formatdate()  # 发件时间
 
         # 得到格式化后的完整文本

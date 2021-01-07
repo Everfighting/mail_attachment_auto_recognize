@@ -10,10 +10,11 @@ from send_mail import SendMail
 from loguru import logger
 
 config = configparser.ConfigParser()
-config.read('./config.ini',encoding='utf-8')
+config.read('./config.ini', encoding='utf-8')
 
 
 def main_process():
+
     # 1. 调用receive_mail.py
     # 下载对应邮箱的附件图片，下载到对应的文件夹 received
     receiver_mail_server = config['receiver']['mail_server']
