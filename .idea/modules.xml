@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../get_res_dict/.idea/get_res_dict.iml" filepath="$PROJECT_DIR$/../../../get_res_dict/.idea/get_res_dict.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mail_attachment_auto_recognize.iml" filepath="$PROJECT_DIR$/.idea/mail_attachment_auto_recognize.iml" />
     </modules>
   </component>
